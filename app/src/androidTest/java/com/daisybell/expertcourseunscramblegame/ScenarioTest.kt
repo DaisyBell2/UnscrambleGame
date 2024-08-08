@@ -2,6 +2,7 @@ package com.daisybell.expertcourseunscramblegame
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.daisybell.expertcourseunscramblegame.game.GamePage
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,10 +29,10 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectState()
@@ -49,10 +50,10 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertIncorrectState()
@@ -70,7 +71,7 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hel")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Animal".reversed())
@@ -85,13 +86,13 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.removeInputLastLetter()
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Dog".reversed())
@@ -106,10 +107,10 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Sky".reversed())
@@ -124,16 +125,16 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.removeInputLastLetter()
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Auto".reversed())
@@ -148,19 +149,19 @@ class ScenarioTest {
         gamePage.assertInitialState()
 
         gamePage.addInputWord(text = "Hell")
-        gamePage.assertInsuffientInputState()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertIncorrectState()
 
-        gamePage.removeInputLastLetter
-        gamePage.assertInsuffientInputState()
+        gamePage.removeInputLastLetter()
+        gamePage.assertInsufficientInputState()
 
         gamePage.addInputWord(text = "o")
-        gamePage.assertSuffientInputState()
+        gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectState()
