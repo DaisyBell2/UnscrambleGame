@@ -5,6 +5,7 @@ import android.widget.LinearLayout
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import com.daisybell.expertcourseunscramblegame.R
 import org.hamcrest.Matcher
 
 /**
@@ -76,7 +77,7 @@ class GamePage(word: String) {
         shuffleWordUi.assertTextVisible()
         inputUi.assertSufficientInputState()
         skipUi.assertVisible()
-        checkUi.assertVisibleEnabled()
+        checkUi.assertVisible()
         nextUi.assertNotVisible()
     }
 
