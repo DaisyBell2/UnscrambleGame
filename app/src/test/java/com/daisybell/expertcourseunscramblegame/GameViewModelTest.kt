@@ -1,6 +1,6 @@
 package com.daisybell.expertcourseunscramblegame
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -10,7 +10,7 @@ class GameViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = GameViewModel(repository = FakeRepository)
+        viewModel = GameViewModel(repository = FakeRepository())
     }
 
     /**
@@ -18,24 +18,24 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber1() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "olleH")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Hell")
-        expected = GameUiState.InsuffientInput(shuffledWord = "olleH")
+        actual = viewModel.handleUserInput(text = "Phon")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Hello")
-        expected = GameUiState.SuffientInput(shuffledWord = "olleH")
+        actual = viewModel.handleUserInput(text = "Phone")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.check(text = "Hello")
-        expected = GameUiState.Correct(shuffledWord = "olleH")
+        actual = viewModel.check(text = "Phone")
+        expected = GameUiState.Correct(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.next()
-        expected = GameUiState.Initial(shuffledWord = "eyB")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -44,24 +44,24 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber2() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "laminA")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Anima")
-        expected = GameUiState.InsuffientInput(shuffledWord = "laminA")
+        actual = viewModel.handleUserInput(text = "Phon")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Animas")
-        expected = GameUiState.SuffientInput(shuffledWord = "laminA")
+        actual = viewModel.handleUserInput(text = "Phona")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.check(text = "Animas")
-        expected = GameUiState.InCorrect(shuffledWord = "laminA")
+        actual = viewModel.check(text = "Phona")
+        expected = GameUiState.InCorrect(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "taC")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -70,16 +70,16 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber3() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "otuA")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Aut")
-        expected = GameUiState.InsuffientInput(shuffledWord = "otuA")
+        actual = viewModel.handleUserInput(text = "Phonas")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "emosewA")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -88,24 +88,24 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber4() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "neeuQ")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Quee")
-        expected = GameUiState.InsuffientInput(shuffledWord = "neeuQ")
+        actual = viewModel.handleUserInput(text = "Phon")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Queen")
-        expected = GameUiState.SuffientInput(shuffledWord = "neeuQ")
+        actual = viewModel.handleUserInput(text = "Phone")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Quee")
-        expected = GameUiState.InsuffientInput(shuffledWord = "neeuQ")
+        actual = viewModel.handleUserInput(text = "Phones")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "oreH")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -114,20 +114,20 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber5() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "ykS")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Sk")
-        expected = GameUiState.InsuffientInput(shuffledWord = "ykS")
+        actual = viewModel.handleUserInput(text = "Phon")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Sky")
-        expected = GameUiState.SuffientInput(shuffledWord = "ykS")
+        actual = viewModel.handleUserInput(text = "Phone")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "goD")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -136,28 +136,28 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber6() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "ekaC")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Cak")
-        expected = GameUiState.InsuffientInput(shuffledWord = "ekaC")
+        actual = viewModel.handleUserInput(text = "Phon")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Cake")
-        expected = GameUiState.SuffientInput(shuffledWord = "ekaC")
+        actual = viewModel.handleUserInput(text = "Phone")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Cakes")
-        expected = GameUiState.InsuffientInput(shuffledWord = "ekaC")
+        actual = viewModel.handleUserInput(text = "Phoner")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
-        actual = viewModel.handleUserInput(text = "Cake")
-        expected = GameUiState.SuffientInput(shuffledWord = "ekaC")
+        actual = viewModel.handleUserInput(text = "Phone")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "ydnaC")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
     }
 
@@ -166,16 +166,16 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber7() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "Phon")
-        expected = GameUiState.InsuffientInput(shuffledWord = "enohP")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "Phons")
-        expected = GameUiState.SuffientInput(shuffledWord = "enohP")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "Phons")
@@ -183,15 +183,15 @@ class GameViewModelTest {
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "Phon")
-        expected = GameUiState.InsuffientInput(shuffledWord = "enohP")
+        expected = GameUiState.InsufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.handleUserInput(text = "Phone")
-        expected = GameUiState.SuffientInput(shuffledWord = "enohP")
+        expected = GameUiState.SufficientInput(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.check(text = "Phone")
-        expected = GameUiState.InCorrect(shuffledWord = "enohP")
+        expected = GameUiState.Correct(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.next()
@@ -204,16 +204,16 @@ class GameViewModelTest {
      */
     @Test
     fun caseNumber8() {
-        val actual: GameUiState = viewModel.init()
-        val expected: GameUiState = GameUiState.Initial(shuffledWord = "retaW")
+        var actual: GameUiState = viewModel.init()
+        var expected: GameUiState = GameUiState.Initial(shuffledWord = "enohP")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "taoB")
+        expected = GameUiState.Initial(shuffledWord = "retupmoC")
         assertEquals(expected, actual)
 
         actual = viewModel.skip()
-        expected = GameUiState.Initial(shuffledWord = "hctaW")
+        expected = GameUiState.Initial(shuffledWord = "oreH")
         assertEquals(expected, actual)
     }
 }
@@ -221,23 +221,9 @@ class GameViewModelTest {
 private class FakeRepository : GameRepository {
 
     private var originalList = listOf(
-        "Hello",
-        "Bye",
-        "Animal",
-        "Cat",
-        "Auto",
-        "Awesome",
-        "Queen",
-        "Hero",
-        "Sky",
-        "Dog",
-        "Cake",
-        "Candy",
         "Phone",
         "Computer",
-        "Water",
-        "Boat",
-        "Watch"
+        "Hero",
     )
 
     private var shuffledWord = originalList.map { word -> word.reversed() }
@@ -254,22 +240,8 @@ private class FakeRepository : GameRepository {
     }
 
     /*
-        "olleH",
-        "eyB",
-        "laminA",
-        "taC",
-        "otuA",
-        "emosewA",
-        "neeuQ",
-        "oreH",
-        "ykS",
-        "goD",
-        "ekaC",
-        "ydnaC",
         "enohP",
         "retupmoC",
-        "retaW",
-        "taoB",
-        "hctaW"
+        "oreH",
      */
 }
