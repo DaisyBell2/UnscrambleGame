@@ -16,9 +16,14 @@ class ScenarioTest {
 
     private lateinit var gamePage: GamePage
 
+    /*
+     Phone
+     Computer
+     Hero
+    */
     @Before
     fun setup() {
-        gamePage = GamePage(word = "Hello".reversed())
+        gamePage = GamePage(word = "Phone".reversed())
     }
 
     /**
@@ -28,17 +33,17 @@ class ScenarioTest {
     fun caseNumber1() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectState()
 
         gamePage.clickNext()
-        gamePage = GamePage(word = "Bye".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -49,17 +54,17 @@ class ScenarioTest {
     fun caseNumber2() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "a")
         gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertIncorrectState()
 
         gamePage.clickSkip()
-        gamePage = GamePage(word = "Cat".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -70,11 +75,11 @@ class ScenarioTest {
     fun caseNumber3() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hel")
+        gamePage.addInputWord(text = "Pho")
         gamePage.assertInsufficientInputState()
 
         gamePage.clickSkip()
-        gamePage = GamePage(word = "Animal".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -85,17 +90,17 @@ class ScenarioTest {
     fun caseNumber4() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.removeInputLastLetter()
         gamePage.assertInsufficientInputState()
 
         gamePage.clickSkip()
-        gamePage = GamePage(word = "Dog".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -106,14 +111,14 @@ class ScenarioTest {
     fun caseNumber5() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.clickSkip()
-        gamePage = GamePage(word = "Sky".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -124,20 +129,20 @@ class ScenarioTest {
     fun caseNumber6() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.removeInputLastLetter()
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.clickSkip()
-        gamePage = GamePage(word = "Auto".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -148,10 +153,10 @@ class ScenarioTest {
     fun caseNumber7() {
         gamePage.assertInitialState()
 
-        gamePage.addInputWord(text = "Hell")
+        gamePage.addInputWord(text = "Phon")
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "a")
         gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
@@ -160,14 +165,14 @@ class ScenarioTest {
         gamePage.removeInputLastLetter()
         gamePage.assertInsufficientInputState()
 
-        gamePage.addInputWord(text = "o")
+        gamePage.addInputWord(text = "e")
         gamePage.assertSufficientInputState()
 
         gamePage.clickCheck()
         gamePage.assertCorrectState()
 
         gamePage.clickNext()
-        gamePage = GamePage(word = "Awesome".reversed())
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
     }
 
@@ -178,11 +183,11 @@ class ScenarioTest {
     fun caseNumber8() {
         gamePage.assertInitialState()
 
-        gamePage.clickNext()
-        gamePage = GamePage(word = "Queen".reversed())
+        gamePage.clickSkip()
+        gamePage = GamePage(word = "Computer".reversed())
         gamePage.assertInitialState()
 
-        gamePage.clickNext()
+        gamePage.clickSkip()
         gamePage = GamePage(word = "Hero".reversed())
         gamePage.assertInitialState()
     }

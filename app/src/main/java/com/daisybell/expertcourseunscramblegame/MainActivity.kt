@@ -21,20 +21,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val viewModel: GameViewModel = GameViewModel(object :GameRepository {
-            override fun shuffledWord(): String {
-                TODO("Not yet implemented")
-            }
-
-            override fun originalWord(): String {
-                TODO("Not yet implemented")
-            }
-
-            override fun check() {
-                TODO("Not yet implemented")
-            }
-
-        })
+        val viewModel = GameViewModel(GameRepository.Base())
 
         binding.skipButton.setOnClickListener {
             val uiState: GameUiState = viewModel.skip()
