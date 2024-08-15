@@ -14,7 +14,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.isNotEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.daisybell.expertcourseunscramblegame.R
 import com.daisybell.expertcourseunscramblegame.matchers.TextInputLayoutErrorEnabledMatcher
@@ -43,14 +42,11 @@ class InputUi(
     private val inputInteraction: ViewInteraction = onView(
         allOf(
             withId(R.id.inputEditText),
-            withParent(withId(inputLayoutId)),
-            withParent(isAssignableFrom(TextInputLayout::class.java)),
             isAssignableFrom(TextInputEditText::class.java)
         )
     )
 
     private val textInputLayoutErrorEnabledMatcherFalse = TextInputLayoutErrorEnabledMatcher(false)
-    private val textInputLayoutHintEnabledMatcherFalse = TextInputLayoutHintEnabledMatcher(false)
 
     fun assertInitialState() {
         layoutInteraction
@@ -58,9 +54,9 @@ class InputUi(
             .check(matches(isEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
             .check(matches(TextInputLayoutHasHintTextMatcher(R.string.hint_message)))
+            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
         inputInteraction
             .check(matches(withText("")))
-            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
     }
 
     fun addWord(text: String) {
@@ -72,7 +68,9 @@ class InputUi(
             .check(matches(isDisplayed()))
             .check(matches(isEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
-        inputInteraction.check(matches(textInputLayoutHintEnabledMatcherFalse))
+            .check(matches(TextInputLayoutHasHintTextMatcher(R.string.hint_message)))
+            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
+
     }
 
     fun assertSufficientInputState() {
@@ -80,7 +78,8 @@ class InputUi(
             .check(matches(isDisplayed()))
             .check(matches(isEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
-        inputInteraction.check(matches(textInputLayoutHintEnabledMatcherFalse))
+            .check(matches(TextInputLayoutHasHintTextMatcher(R.string.hint_message)))
+            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
     }
 
     fun assertCorrectState() {
@@ -88,7 +87,8 @@ class InputUi(
             .check(matches(isDisplayed()))
             .check(matches(isNotEnabled()))
             .check(matches(textInputLayoutErrorEnabledMatcherFalse))
-        inputInteraction.check(matches(textInputLayoutHintEnabledMatcherFalse))
+            .check(matches(TextInputLayoutHasHintTextMatcher(R.string.hint_message)))
+            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
     }
 
     fun assertIncorrectState() {
@@ -97,7 +97,8 @@ class InputUi(
             .check(matches(isEnabled()))
             .check(matches(TextInputLayoutErrorEnabledMatcher(true)))
             .check(matches(TextInputLayoutHasErrorTextMatcher(R.string.incorrect_message)))
-        inputInteraction.check(matches(textInputLayoutHintEnabledMatcherFalse))
+            .check(matches(TextInputLayoutHasHintTextMatcher(R.string.hint_message)))
+            .check(matches(TextInputLayoutHintEnabledMatcher(true)))
     }
 
     fun removeLastLetter() {
