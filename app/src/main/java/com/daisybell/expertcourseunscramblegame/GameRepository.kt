@@ -5,8 +5,12 @@ interface GameRepository {
     fun shuffledWord(): String
     fun originalWord(): String
     fun check()
+    fun saveUserInput(value: String)
+    fun userInput(): String
 
     class Base(
+        private val index: IntCache,
+        private val userInput: StringCache,
         private val shuffleStrategy: ShuffleStrategy = ShuffleStrategy.Reverse(),
         private val originalList: List<String> = listOf(
             "Phone",
@@ -18,18 +22,21 @@ interface GameRepository {
         private val shuffledList: List<String> =
             originalList.map { word -> shuffleStrategy.shuffle(word) }
 
-        private var index = 0
+        override fun shuffledWord(): String = shuffledList[index.read()]
 
-        override fun shuffledWord(): String = shuffledList[index]
-
-        override fun originalWord(): String = originalList[index]
+        override fun originalWord(): String = originalList[index.read()]
 
         override fun check() {
-            if (index + 1 == originalList.size)
-                index = 0
-            else
-                index++
+            val value = index.read() + 1
+            index.save(if (value == originalList.size) 0 else value)
+            userInput.save("")
         }
+
+        override fun saveUserInput(value: String) {
+            userInput.save(value)
+        }
+
+        override fun userInput(): String = userInput.read()
 
     }
 }
