@@ -4,10 +4,11 @@ class GameViewModel(private val repository: GameRepository) {
 
 
     fun init(): GameUiState {
-        return GameUiState.Initial(repository.shuffledWord())
+        return GameUiState.Initial(repository.shuffledWord(), repository.userInput())
     }
 
     fun handleUserInput(text: String): GameUiState {
+        repository.saveUserInput(text)
         val shuffledWord = repository.shuffledWord()
         val isSufficient = text.length == shuffledWord.length
 

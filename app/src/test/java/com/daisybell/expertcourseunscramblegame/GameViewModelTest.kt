@@ -237,7 +237,16 @@ private class FakeRepository : GameRepository {
     override fun check() {
         index++
         if (index == originalList.size) index = 0
+        saveUserInput("")
     }
+
+    private var userInput: String = ""
+
+    override fun saveUserInput(value: String) {
+        userInput = value
+    }
+
+    override fun userInput(): String = userInput
 
     /*
         "enohP",
