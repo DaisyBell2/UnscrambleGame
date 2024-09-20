@@ -2,8 +2,9 @@ package com.daisybell.expertcourseunscramblegame
 
 import android.view.View
 import com.daisybell.expertcourseunscramblegame.databinding.ActivityMainBinding
+import java.io.Serializable
 
-interface GameUiState {
+interface GameUiState : Serializable {
 
     fun update(binding: ActivityMainBinding)
 
@@ -26,41 +27,41 @@ interface GameUiState {
 
     data class Initial(private val shuffledWord: String) : Abstract(
         shuffledValue = shuffledWord,
-        inputUiState = InputUiState.Initial,
+        inputUiState = InputUiState.Initial(),
         skipVisibility = View.VISIBLE,
-        checkUiState = CheckUiState.Disabled,
+        checkUiState = CheckUiState.Disabled(),
         nextVisibility = View.GONE,
     )
 
     data class InsufficientInput(private val shuffledWord: String) : Abstract(
         shuffledValue = shuffledWord,
-        inputUiState = InputUiState.EnabledNoError,
+        inputUiState = InputUiState.EnabledNoError(),
         skipVisibility = View.VISIBLE,
-        checkUiState = CheckUiState.Disabled,
+        checkUiState = CheckUiState.Disabled(),
         nextVisibility = View.GONE,
     )
 
     data class SufficientInput(private val shuffledWord: String) : Abstract(
         shuffledValue = shuffledWord,
-        inputUiState = InputUiState.EnabledNoError,
+        inputUiState = InputUiState.EnabledNoError(),
         skipVisibility = View.VISIBLE,
-        checkUiState = CheckUiState.Enabled,
+        checkUiState = CheckUiState.Enabled(),
         nextVisibility = View.GONE,
     )
 
     data class Correct(private val shuffledWord: String) : Abstract(
         shuffledValue = shuffledWord,
-        inputUiState = InputUiState.Correct,
+        inputUiState = InputUiState.Correct(),
         skipVisibility = View.INVISIBLE,
-        checkUiState = CheckUiState.Invisible,
+        checkUiState = CheckUiState.Invisible(),
         nextVisibility = View.VISIBLE,
     )
 
     data class InCorrect(private val shuffledWord: String) : Abstract(
         shuffledValue = shuffledWord,
-        inputUiState = InputUiState.Incorrect,
+        inputUiState = InputUiState.Incorrect(),
         skipVisibility = View.VISIBLE,
-        checkUiState = CheckUiState.Disabled,
+        checkUiState = CheckUiState.Disabled(),
         nextVisibility = View.GONE,
     )
 

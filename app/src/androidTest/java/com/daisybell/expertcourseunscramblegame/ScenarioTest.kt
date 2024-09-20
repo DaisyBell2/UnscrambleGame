@@ -26,35 +26,31 @@ class ScenarioTest {
         gamePage = GamePage(word = "Phone".reversed())
     }
 
+    private fun ActivityScenarioRule<*>.doWithRecreate(block: () -> Unit) {
+        block.invoke()
+        scenario.recreate()
+        block.invoke()
+    }
+
     /**
      * UGTC-01
      */
     @Test
     fun caseNumber1() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickCheck()
-        gamePage.assertCorrectState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertCorrectState()
+        scenarioRule.doWithRecreate(gamePage::assertCorrectState)
 
         gamePage.clickNext()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -62,30 +58,20 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber2() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "a")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickCheck()
-        gamePage.assertIncorrectState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertIncorrectState()
+        scenarioRule.doWithRecreate(gamePage::assertIncorrectState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -93,20 +79,14 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber3() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Pho")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -114,30 +94,20 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber4() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.removeInputLastLetter()
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -145,25 +115,17 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber5() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -171,35 +133,23 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber6() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.removeInputLastLetter()
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -207,45 +157,29 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber7() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.addInputWord(text = "Phon")
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "a")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickCheck()
-        gamePage.assertIncorrectState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertIncorrectState()
+        scenarioRule.doWithRecreate(gamePage::assertIncorrectState)
 
         gamePage.removeInputLastLetter()
-        gamePage.assertInsufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInsufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertInsufficientInputState)
 
         gamePage.addInputWord(text = "e")
-        gamePage.assertSufficientInputState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertSufficientInputState()
+        scenarioRule.doWithRecreate(gamePage::assertSufficientInputState)
 
         gamePage.clickCheck()
-        gamePage.assertCorrectState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertCorrectState()
+        scenarioRule.doWithRecreate(gamePage::assertCorrectState)
 
         gamePage.clickNext()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 
     /**
@@ -253,20 +187,14 @@ class ScenarioTest {
      */
     @Test
     fun caseNumber8() {
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Computer".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
 
         gamePage.clickSkip()
         gamePage = GamePage(word = "Hero".reversed())
-        gamePage.assertInitialState()
-        scenarioRule.scenario.recreate()
-        gamePage.assertInitialState()
+        scenarioRule.doWithRecreate(gamePage::assertInitialState)
     }
 }

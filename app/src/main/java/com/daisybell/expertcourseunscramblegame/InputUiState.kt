@@ -2,8 +2,9 @@ package com.daisybell.expertcourseunscramblegame
 
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.io.Serializable
 
-interface InputUiState {
+interface InputUiState : Serializable {
 
     fun update(inputLayout: TextInputLayout, inputEditText: TextInputEditText)
 
@@ -22,11 +23,11 @@ interface InputUiState {
         }
     }
 
-    object Initial : Abstract(true, false, true)
+    class Initial : Abstract(true, false, true)
 
-    object EnabledNoError : Abstract(false, false, true)
+    class EnabledNoError : Abstract(false, false, true)
 
-    object Correct : Abstract(false, false, false)
+    class Correct : Abstract(false, false, false)
 
-    object Incorrect : Abstract(false, true, true)
+    class Incorrect : Abstract(false, true, true)
 }

@@ -2,8 +2,9 @@ package com.daisybell.expertcourseunscramblegame
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
+import java.io.Serializable
 
-interface CheckUiState {
+interface CheckUiState : Serializable {
     fun update(button: AppCompatButton)
 
     abstract class Abstract(
@@ -16,9 +17,9 @@ interface CheckUiState {
         }
     }
 
-    object Disabled : Abstract(View.VISIBLE, false)
+    class Disabled : Abstract(View.VISIBLE, false)
 
-    object Enabled : Abstract(View.VISIBLE, true)
+    class Enabled : Abstract(View.VISIBLE, true)
 
-    object Invisible : Abstract(View.GONE, false)
+    class Invisible : Abstract(View.GONE, false)
 }
