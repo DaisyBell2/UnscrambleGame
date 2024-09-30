@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
             android:id="@+id/skipButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/checkButton" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
             android:id="@+id/checkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/nextButton" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
+        <com.daisybell.expertcourseunscramblegame.views.shuffledword.ShuffleWordTextView
             android:id="@+id/shuffleWordTextView"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
             android:textIsSelectable="true"
             tools:text="Hello World!" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <com.daisybell.expertcourseunscramblegame.views.input.layout.TextInputLayout
             android:id="@+id/inputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,12 +80,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.daisybell.expertcourseunscramblegame.views.input.edittext.TextInputEditText
                 android:id="@+id/inputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.daisybell.expertcourseunscramblegame.views.input.layout.TextInputLayout>
 
     </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.daisybell.expertcourseunscramblegame
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +15,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: GameViewModel
 
+    val update: () -> Unit = {
+        uiState.update(
+            shuffleWordTextView = binding.shuffleWordTextView,
+            textInputLayout = binding.inputLayout,
+            textInputEditText = binding.inputEditText,
+            skipVisibleEnabledButton = binding.skipButton,
+            checkVisibleEnabledButton = binding.checkButton,
+            nextVisibleEnabledButton = binding.nextButton,
+        )
+    }
+
     private var textWatcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
@@ -23,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun afterTextChanged(s: Editable?) {
             uiState = viewModel.handleUserInput(text = s.toString())
-            uiState.update(binding = binding)
+            update.invoke()
         }
     }
 
@@ -43,32 +53,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.skipButton.setOnClickListener {
             uiState = viewModel.skip()
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.checkButton.setOnClickListener {
             uiState = viewModel.check(text = binding.inputEditText.text.toString())
-            uiState.update(binding = binding)
+            update.invoke()
         }
         binding.nextButton.setOnClickListener {
             uiState = viewModel.next()
-            uiState.update(binding = binding)
+            update.invoke()
         }
 
-        uiState = if (savedInstanceState == null) {
-            viewModel.init()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                savedInstanceState.getSerializable(KEY, GameUiState::class.java) as GameUiState
-            } else {
-                savedInstanceState.getSerializable(KEY) as GameUiState
-            }
-        }
-        uiState.update(binding = binding)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(KEY, uiState)
+        uiState = viewModel.init(savedInstanceState == null)
+        update.invoke()
     }
 
     override fun onResume() {
@@ -79,9 +76,5 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         binding.inputEditText.removeTextChangedListener(textWatcher)
-    }
-
-    companion object {
-        private const val KEY = "uiState"
     }
 }

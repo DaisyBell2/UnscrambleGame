@@ -1,25 +1,26 @@
 package com.daisybell.expertcourseunscramblegame
 
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
+import com.daisybell.expertcourseunscramblegame.views.visiblebutton.UpdateVisibleEnabledButton
 import java.io.Serializable
 
 interface CheckUiState : Serializable {
-    fun update(button: AppCompatButton)
+    fun update(button: UpdateVisibleEnabledButton)
 
     abstract class Abstract(
         private val visible: Int,
-        private val enabled: Boolean
+        private val enabled: Boolean = true
     ) : CheckUiState {
-        override fun update(button: AppCompatButton) = with(button) {
-            visibility = visible
-            isEnabled = enabled
+        override fun update(button: UpdateVisibleEnabledButton) {
+            button.update(visible, enabled)
         }
     }
 
-    class Disabled : Abstract(View.VISIBLE, false)
+    object Disabled : Abstract(View.VISIBLE, false)
 
-    class Enabled : Abstract(View.VISIBLE, true)
+    object Visible : Abstract(View.VISIBLE, true)
 
-    class Invisible : Abstract(View.GONE, false)
+    object Invisible : Abstract(View.INVISIBLE, false)
+
+    object Gone : Abstract(View.GONE, false)
 }

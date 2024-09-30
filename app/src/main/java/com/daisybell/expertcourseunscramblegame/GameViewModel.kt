@@ -3,9 +3,11 @@ package com.daisybell.expertcourseunscramblegame
 class GameViewModel(private val repository: GameRepository) {
 
 
-    fun init(): GameUiState {
-        return GameUiState.Initial(repository.shuffledWord(), repository.userInput())
-    }
+    fun init(firstRun: Boolean = true): GameUiState =
+        if (firstRun) {
+            GameUiState.Initial(repository.shuffledWord(), repository.userInput())
+        } else GameUiState.Empty
+
 
     fun handleUserInput(text: String): GameUiState {
         repository.saveUserInput(text)
@@ -13,22 +15,21 @@ class GameViewModel(private val repository: GameRepository) {
         val isSufficient = text.length == shuffledWord.length
 
         return if (isSufficient) {
-            GameUiState.SufficientInput(shuffledWord)
+            GameUiState.SufficientInput
         } else {
-            GameUiState.InsufficientInput(shuffledWord)
+            GameUiState.InsufficientInput
         }
     }
 
     fun check(text: String): GameUiState {
-        val shuffledWord = repository.shuffledWord()
         val originalWord = repository.originalWord()
 
         val isCorrect = originalWord.equals(text, ignoreCase = true)
 
         return if (isCorrect) {
-            GameUiState.Correct(shuffledWord)
+            GameUiState.Correct
         } else {
-            GameUiState.InCorrect(shuffledWord)
+            GameUiState.InCorrect
         }
     }
 
