@@ -15,15 +15,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: GameViewModel
 
-    val update: () -> Unit = {
-        uiState.update(
-            shuffleWordTextView = binding.shuffleWordTextView,
-            textInputLayout = binding.inputLayout,
-            textInputEditText = binding.inputEditText,
-            skipVisibleEnabledButton = binding.skipButton,
-            checkVisibleEnabledButton = binding.checkButton,
-            nextVisibleEnabledButton = binding.nextButton,
-        )
+    private val update: () -> Unit = {
+       uiState.update(
+           shuffleWordTextView = binding.shuffleWordTextView,
+           inputView = binding.inputView,
+           skip = binding.skipButton,
+           check = binding.checkButton,
+           next = binding.nextButton,
+       )
     }
 
     private var textWatcher: TextWatcher = object : TextWatcher {
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             update.invoke()
         }
         binding.checkButton.setOnClickListener {
-            uiState = viewModel.check(text = binding.inputEditText.text.toString())
+            uiState = viewModel.check(text = binding.inputView.text())
             update.invoke()
         }
         binding.nextButton.setOnClickListener {
@@ -70,11 +69,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.inputEditText.addTextChangedListener(textWatcher)
+        binding.inputView.addTextChangedListener(textWatcher)
     }
 
     override fun onPause() {
         super.onPause()
-        binding.inputEditText.removeTextChangedListener(textWatcher)
+        binding.inputView.removeTextChangedListener(textWatcher)
     }
 }

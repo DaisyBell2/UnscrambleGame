@@ -1,12 +1,11 @@
-package com.daisybell.expertcourseunscramblegame.views.input.layout
+package com.daisybell.expertcourseunscramblegame.views.input
 
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
-import com.daisybell.expertcourseunscramblegame.InputUiState
 
-class TextInputLayoutSavedState : View.BaseSavedState {
+class InputViewSavedState : View.BaseSavedState {
 
     private lateinit var state: InputUiState
 
@@ -36,11 +35,11 @@ class TextInputLayoutSavedState : View.BaseSavedState {
 
     override fun describeContents() = 0
 
-    companion object CREATOR : Parcelable.Creator<TextInputLayoutSavedState> {
+    companion object CREATOR : Parcelable.Creator<InputViewSavedState> {
 
-        override fun createFromParcel(parcel: Parcel): TextInputLayoutSavedState =
-            TextInputLayoutSavedState(parcel)
+        override fun createFromParcel(parcel: Parcel): InputViewSavedState =
+            InputViewSavedState(parcel)
 
-        override fun newArray(size: Int): Array<TextInputLayoutSavedState?> = arrayOfNulls(size)
+        override fun newArray(size: Int): Array<InputViewSavedState?> = arrayOfNulls(size)
     }
 }

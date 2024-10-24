@@ -1,4 +1,4 @@
-package com.daisybell.expertcourseunscramblegame.views.input.layout
+package com.daisybell.expertcourseunscramblegame.views.check
 
 /**
  * @author DaisyBell on 30.09.2024
@@ -6,11 +6,9 @@ package com.daisybell.expertcourseunscramblegame.views.input.layout
 import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
-import com.daisybell.expertcourseunscramblegame.InputUiState
-import com.daisybell.expertcourseunscramblegame.R
-import com.google.android.material.textfield.TextInputLayout
+import androidx.appcompat.widget.AppCompatButton
 
-class TextInputLayout : TextInputLayout, UpdateTextInputLayout {
+class CheckButton : AppCompatButton, UpdateCheckButton {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -20,31 +18,31 @@ class TextInputLayout : TextInputLayout, UpdateTextInputLayout {
         defStyleAttr
     )
 
-    private lateinit var uiState: InputUiState
+    private lateinit var uiState: CheckUiState
 
     override fun onSaveInstanceState(): Parcelable? {
         return super.onSaveInstanceState()?.let {
-            val savedState = TextInputLayoutSavedState(it)
+            val savedState = CheckButtonSavedState(it)
             savedState.save(uiState)
             return savedState
         }
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        val restoredState = state as TextInputLayoutSavedState
+        val restoredState = state as CheckButtonSavedState
         super.onRestoreInstanceState(restoredState.superState)
         update(restoredState.restore())
     }
 
-    override fun update(state: InputUiState) {
+    override fun update(state: CheckUiState) {
         uiState = state
         state.update(this)
     }
 
-    override fun update(errorVisible: Boolean, enabled: Boolean) {
-        isErrorEnabled = errorVisible
-        if (errorVisible)
-            error = this.context.getString(R.string.incorrect_message)
+    override fun update(visibility: Int, enabled: Boolean) {
+        this.visibility = visibility
         isEnabled = enabled
     }
 }
+
+

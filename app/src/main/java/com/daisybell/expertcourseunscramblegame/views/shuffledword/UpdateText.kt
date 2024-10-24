@@ -1,6 +1,6 @@
 package com.daisybell.expertcourseunscramblegame.views.shuffledword
 
-interface UpdateShuffleWordTextView {
+interface UpdateText {
 
     fun update(text: String)
 }

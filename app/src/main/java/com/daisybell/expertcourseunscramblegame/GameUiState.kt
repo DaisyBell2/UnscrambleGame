@@ -1,118 +1,101 @@
 package com.daisybell.expertcourseunscramblegame
 
-import com.daisybell.expertcourseunscramblegame.views.input.edittext.UpdateTextInputEditText
-import com.daisybell.expertcourseunscramblegame.views.input.layout.UpdateTextInputLayout
-import com.daisybell.expertcourseunscramblegame.views.shuffledword.UpdateShuffleWordTextView
-import com.daisybell.expertcourseunscramblegame.views.visiblebutton.UpdateVisibleEnabledButton
-import java.io.Serializable
+import com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibilityUiState
+import com.daisybell.expertcourseunscramblegame.views.check.CheckUiState
+import com.daisybell.expertcourseunscramblegame.views.check.UpdateCheckButton
+import com.daisybell.expertcourseunscramblegame.views.input.InputUiState
+import com.daisybell.expertcourseunscramblegame.views.input.UpdateInput
+import com.daisybell.expertcourseunscramblegame.views.shuffledword.UpdateText
+import com.daisybell.expertcourseunscramblegame.views.visiblebutton.UpdateVisibility
 
-interface GameUiState : Serializable {
+interface GameUiState {
 
     fun update(
-        shuffleWordTextView: UpdateShuffleWordTextView,
-        textInputLayout: UpdateTextInputLayout,
-        textInputEditText: UpdateTextInputEditText,
-        skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-        checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-        nextVisibleEnabledButton: UpdateVisibleEnabledButton,
+        shuffleWordTextView: UpdateText,
+        inputView: UpdateInput,
+        skip: UpdateVisibility,
+        check: UpdateCheckButton,
+        next: UpdateVisibility,
     )
+
+    object Empty : GameUiState {
+        override fun update(
+            shuffleWordTextView: UpdateText,
+            inputView: UpdateInput,
+            skip: UpdateVisibility,
+            check: UpdateCheckButton,
+            next: UpdateVisibility
+        ) = Unit
+    }
+
+    abstract class Abstract(
+        private val inputUiState: InputUiState,
+        private val checkUiState: CheckUiState,
+    ) : GameUiState {
+        override fun update(
+            shuffleWordTextView: UpdateText,
+            inputView: UpdateInput,
+            skip: UpdateVisibility,
+            check: UpdateCheckButton,
+            next: UpdateVisibility
+        ) {
+            inputView.update(inputUiState)
+            check.update(checkUiState)
+        }
+    }
 
     data class Initial(
         private val shuffledWord: String,
         private val userInput: String = "",
-    ) : GameUiState {
+    ) : Abstract(
+        inputUiState = InputUiState.Initial(userInput),
+        checkUiState = CheckUiState.Disabled,
+    ) {
         override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
+            shuffleWordTextView: UpdateText,
+            inputView: UpdateInput,
+            skip: UpdateVisibility,
+            check: UpdateCheckButton,
+            next: UpdateVisibility
         ) {
+            super.update(shuffleWordTextView, inputView, skip, check, next)
             shuffleWordTextView.update(shuffledWord)
-            textInputLayout.update(InputUiState.Initial)
-            textInputEditText.update(userInput)
-            skipVisibleEnabledButton.update(CheckUiState.Visible)
-            checkVisibleEnabledButton.update(CheckUiState.Disabled)
-            nextVisibleEnabledButton.update(CheckUiState.Gone)
+            skip.update(VisibilityUiState.Visible)
+            next.update(VisibilityUiState.Gone)
         }
     }
 
-    object InsufficientInput : GameUiState {
+    object InsufficientInput : Abstract(
+        inputUiState = InputUiState.EnabledNoError,
+        checkUiState = CheckUiState.Disabled,
+    )
+
+    object SufficientInput : Abstract(
+        inputUiState = InputUiState.EnabledNoError,
+        checkUiState = CheckUiState.Enabled,
+    )
+
+    object Correct : Abstract(
+        inputUiState = InputUiState.Correct,
+        checkUiState = CheckUiState.Gone,
+    ) {
         override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
+            shuffleWordTextView: UpdateText,
+            inputView: UpdateInput,
+            skip: UpdateVisibility,
+            check: UpdateCheckButton,
+            next: UpdateVisibility
         ) {
-            textInputLayout.update(InputUiState.EnabledNoError)
-            skipVisibleEnabledButton.update(CheckUiState.Visible)
-            checkVisibleEnabledButton.update(CheckUiState.Disabled)
-            nextVisibleEnabledButton.update(CheckUiState.Gone)
+            super.update(shuffleWordTextView, inputView, skip, check, next)
+            skip.update(VisibilityUiState.Invisible)
+            next.update(VisibilityUiState.Visible)
         }
     }
 
-    object SufficientInput : GameUiState {
-        override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
-        ) {
-            textInputLayout.update(InputUiState.EnabledNoError)
-            skipVisibleEnabledButton.update(CheckUiState.Visible)
-            checkVisibleEnabledButton.update(CheckUiState.Visible)
-            nextVisibleEnabledButton.update(CheckUiState.Gone)
-        }
-    }
-
-    object Correct : GameUiState {
-        override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
-        ) {
-            textInputLayout.update(InputUiState.Correct)
-            skipVisibleEnabledButton.update(CheckUiState.Invisible)
-            checkVisibleEnabledButton.update(CheckUiState.Gone)
-            nextVisibleEnabledButton.update(CheckUiState.Visible)
-        }
-    }
-
-    object InCorrect : GameUiState {
-        override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
-        ) {
-            textInputLayout.update(InputUiState.Incorrect)
-            skipVisibleEnabledButton.update(CheckUiState.Visible)
-            checkVisibleEnabledButton.update(CheckUiState.Disabled)
-            nextVisibleEnabledButton.update(CheckUiState.Gone)
-        }
-    }
-
-    object Empty : GameUiState {
-        override fun update(
-            shuffleWordTextView: UpdateShuffleWordTextView,
-            textInputLayout: UpdateTextInputLayout,
-            textInputEditText: UpdateTextInputEditText,
-            skipVisibleEnabledButton: UpdateVisibleEnabledButton,
-            checkVisibleEnabledButton: UpdateVisibleEnabledButton,
-            nextVisibleEnabledButton: UpdateVisibleEnabledButton
-        ) = Unit
-
-    }
+    object InCorrect : Abstract(
+        inputUiState = InputUiState.Incorrect,
+        checkUiState = CheckUiState.Disabled,
+    )
 
 }
 

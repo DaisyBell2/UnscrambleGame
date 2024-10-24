@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
+        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibilityButton
             android:id="@+id/skipButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/checkButton" />
 
-        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
+        <com.daisybell.expertcourseunscramblegame.views.check.CheckButton
             android:id="@+id/checkButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/nextButton" />
 
-        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibleEnabledButton
+        <com.daisybell.expertcourseunscramblegame.views.visiblebutton.VisibilityButton
             android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,21 +71,12 @@
             android:textIsSelectable="true"
             tools:text="Hello World!" />
 
-        <com.daisybell.expertcourseunscramblegame.views.input.layout.TextInputLayout
-            android:id="@+id/inputLayout"
+        <com.daisybell.expertcourseunscramblegame.views.input.InputView
+            android:id="@+id/inputView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:hint="@string/hint_message"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.daisybell.expertcourseunscramblegame.views.input.edittext.TextInputEditText
-                android:id="@+id/inputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </com.daisybell.expertcourseunscramblegame.views.input.layout.TextInputLayout>
+            tools:showIn="@layout/input" />
 
     </LinearLayout>
 

@@ -1,12 +1,11 @@
-package com.daisybell.expertcourseunscramblegame.views.visiblebutton
+package com.daisybell.expertcourseunscramblegame.views.check
 
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
-import com.daisybell.expertcourseunscramblegame.CheckUiState
 
-class VisibleEnabledButtonSavedState : View.BaseSavedState {
+class CheckButtonSavedState : View.BaseSavedState {
 
     private lateinit var state: CheckUiState
 
@@ -36,12 +35,11 @@ class VisibleEnabledButtonSavedState : View.BaseSavedState {
 
     override fun describeContents() = 0
 
-    companion object CREATOR : Parcelable.Creator<VisibleEnabledButtonSavedState> {
+    companion object CREATOR : Parcelable.Creator<CheckButtonSavedState> {
 
-        override fun createFromParcel(parcel: Parcel): VisibleEnabledButtonSavedState =
-            VisibleEnabledButtonSavedState(parcel)
+        override fun createFromParcel(parcel: Parcel): CheckButtonSavedState =
+            CheckButtonSavedState(parcel)
 
-        override fun newArray(size: Int): Array<VisibleEnabledButtonSavedState?> =
-            arrayOfNulls(size)
+        override fun newArray(size: Int): Array<CheckButtonSavedState?> = arrayOfNulls(size)
     }
 }
