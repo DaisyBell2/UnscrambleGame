@@ -11,35 +11,35 @@ class CheckUiStateTest {
 
     @Test
     fun testEnabled() {
-        val enabled = CheckUiState.Enabled
-        val button = FakeButton()
+        val uiState = CheckUiState.Enabled
+        val sut = FakeButton()
 
-        enabled.update(button)
+        uiState.update(sut)
 
-        assertEquals(View.VISIBLE, button.visibility)
-        assertEquals(true, button.enabled)
+        assertEquals(View.VISIBLE, sut.visibility)
+        assertEquals(true, sut.enabled)
     }
 
     @Test
     fun testDisabled() {
-        val disabled = CheckUiState.Disabled
-        val button = FakeButton()
+        val uiState = CheckUiState.Disabled
+        val sut = FakeButton()
 
-        disabled.update(button)
+        uiState.update(sut)
 
-        assertEquals(View.VISIBLE, button.visibility)
-        assertEquals(false, button.enabled)
+        assertEquals(View.VISIBLE, sut.visibility)
+        assertEquals(false, sut.enabled)
     }
 
     @Test
     fun testGone() {
-        val gone = CheckUiState.Gone
-        val button = FakeButton()
+        val uiState = CheckUiState.Gone
+        val sut = FakeButton()
 
-        gone.update(button)
+        uiState.update(sut)
 
-        assertEquals(View.GONE, button.visibility)
-        assertEquals(false, button.enabled)
+        assertEquals(View.GONE, sut.visibility)
+        assertEquals(false, sut.enabled)
     }
 
 }
