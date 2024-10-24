@@ -1,7 +1,6 @@
 package com.daisybell.expertcourseunscramblegame.game
 
 import android.view.KeyEvent
-import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions.click
@@ -23,18 +22,12 @@ import com.daisybell.expertcourseunscramblegame.matchers.TextInputLayoutHintEnab
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.Matcher
 
-class InputUi(
-    containerIdMatcher: Matcher<View>,
-    containerClassTypeMatcher: Matcher<View>
-) {
+class InputUi {
 
     private val inputLayoutId: Int = R.id.inputLayout
     private val layoutInteraction: ViewInteraction = onView(
         allOf(
-            containerIdMatcher,
-            containerClassTypeMatcher,
             withId(inputLayoutId),
             isAssignableFrom(TextInputLayout::class.java)
         )
